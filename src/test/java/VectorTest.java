@@ -22,6 +22,14 @@ public class VectorTest {
         assertEquals(10, v.get(2), 1e-10);
     }
 
+    @Test
+    public void testVectorDotProduct() {
+        final Vector v1 = new Vector(1, -3, 5);
+        final Vector v2 = new Vector(-1, -2, -1);
+
+        assertEquals(0, Vector.dot(v1, v2), 1e-10);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testAddingTwoDifferentlySizedVectorsThrows() {
         Vector.add(new Vector(1, 2), new Vector(3, 2, 4));
