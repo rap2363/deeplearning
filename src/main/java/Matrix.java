@@ -33,6 +33,24 @@ public final class Matrix {
     }
 
     /**
+     * Return the number of rows
+     *
+     * @return
+     */
+    public int numRows() {
+        return this.matrix.length;
+    }
+
+    /**
+     * Return the number of columns.
+     *
+     * @return
+     */
+    public int numCols() {
+        return this.matrix[0].length;
+    }
+
+    /**
      * Replace the element at (row, col) with value
      *
      * @param row

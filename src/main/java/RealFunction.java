@@ -1,11 +1,21 @@
 /**
- * One-line interface to capture the behavior of a function which evaluates a vector and returns a real number. By
- * default, evaluateAt(double) is evaluated as a 1-D vector.
+ * A function which maps the real numbers to the real numbers. Specifically used as an activation function for
+ * nodes.
  */
 public interface RealFunction {
-    double evaluateAt(Vector vector);
+    RealFunction IDENTITY = new RealFunction() {
+        @Override
+        public double evaluateAt(double value) {
+            return value;
+        }
+    };
 
-    default double evaluateAt(double value) {
-        return this.evaluateAt(new Vector(value));
-    }
+    RealFunction UNITY = new RealFunction() {
+        @Override
+        public double evaluateAt(double value) {
+            return 1d;
+        }
+    };
+
+    double evaluateAt(double value);
 }

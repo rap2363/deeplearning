@@ -4,7 +4,7 @@ import javax.annotation.concurrent.Immutable;
  * Implement a simple linear function with weights s.t. f(x) = w^x
  */
 @Immutable
-public class LinearFunction implements RealFunction {
+public class LinearFunction implements VectorFunction {
     private final Vector weights;
 
     public LinearFunction(final Vector weights) {

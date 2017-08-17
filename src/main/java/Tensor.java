@@ -10,12 +10,16 @@ public final class Tensor {
     private final Matrix[] matrices;
 
     private Tensor(final List<Matrix> matrices) {
-        this.matrices = (Matrix[]) matrices.toArray();
+        this.matrices = matrices.toArray(new Matrix[0]);
     }
 
     public Matrix get(final int index) {
         Preconditions.checkArgument(index >= 0 && index < this.matrices.length);
         return this.matrices[index];
+    }
+
+    public int size() {
+        return this.matrices.length;
     }
 
     public static class Builder {

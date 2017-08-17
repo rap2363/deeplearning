@@ -5,7 +5,7 @@ import javax.annotation.concurrent.Immutable;
  * This function is stateless,immutable, and needs no members, so it is instantiated as a singleton
  */
 @Immutable
-public final class SigmoidFunction implements ActivationFunction {
+public final class SigmoidFunction implements RealFunction {
     private static final SigmoidFunction INSTANCE = new SigmoidFunction();
 
     private SigmoidFunction() {
