@@ -1,3 +1,7 @@
+package org.rparanjpe.deeplearning.functions;
+
+import org.rparanjpe.deeplearning.math.Vector;
+
 import javax.annotation.concurrent.Immutable;
 import java.util.function.Function;
 

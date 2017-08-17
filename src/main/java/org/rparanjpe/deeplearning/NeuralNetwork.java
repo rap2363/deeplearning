@@ -1,12 +1,16 @@
+package org.rparanjpe.deeplearning;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
+import org.rparanjpe.deeplearning.math.Tensor;
+import org.rparanjpe.deeplearning.math.Vector;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A NeuralNetwork is built up of multiple layers of neurons with zero or more hidden layers, and an
+ * A org.rparanjpe.deeplearning.NeuralNetwork is built up of multiple layers of neurons with zero or more hidden layers, and an
  * output layer.
  */
 @Immutable

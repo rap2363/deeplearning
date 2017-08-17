@@ -1,3 +1,11 @@
+package org.rparanjpe.deeplearning;
+
+import org.rparanjpe.deeplearning.NeuralNetwork;
+import org.rparanjpe.deeplearning.Neuron;
+import org.rparanjpe.deeplearning.functions.SigmoidFunction;
+import org.rparanjpe.deeplearning.math.Matrix;
+import org.rparanjpe.deeplearning.math.Tensor;
+import org.rparanjpe.deeplearning.math.Vector;
 import org.junit.Test;
 
 import java.util.function.Function;

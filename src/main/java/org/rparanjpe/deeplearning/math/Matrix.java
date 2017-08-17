@@ -1,3 +1,5 @@
+package org.rparanjpe.deeplearning.math;
+
 import com.google.common.base.Preconditions;
 
 import java.util.ArrayList;
@@ -95,7 +97,7 @@ public final class Matrix {
         }
 
         public Matrix build() {
-            Preconditions.checkArgument(this.rows.size() > 0, "Matrix must have at least one row!");
+            Preconditions.checkArgument(this.rows.size() > 0, "org.rparanjpe.deeplearning.math.Matrix must have at least one row!");
             return new Matrix(this.rows);
         }
     }

@@ -1,3 +1,5 @@
+package org.rparanjpe.deeplearning.math;
+
 import com.google.common.base.Preconditions;
 
 import java.util.ArrayList;

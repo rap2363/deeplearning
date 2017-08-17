@@ -1,4 +1,7 @@
+package org.rparanjpe.deeplearning.functions;
+
 import org.junit.Test;
+import org.rparanjpe.deeplearning.math.Vector;
 
 import java.util.function.Function;
 

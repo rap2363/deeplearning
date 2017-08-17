@@ -1,3 +1,6 @@
+package org.rparanjpe.deeplearning.math;
+
+import org.rparanjpe.deeplearning.math.Vector;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

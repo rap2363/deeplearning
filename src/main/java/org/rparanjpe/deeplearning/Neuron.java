@@ -1,4 +1,7 @@
+package org.rparanjpe.deeplearning;
+
 import com.google.common.base.Preconditions;
+import org.rparanjpe.deeplearning.math.Vector;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
@@ -6,7 +9,7 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * One of the building blocks of a neural network, a Neuron is an immutable structure correlated with an activation
+ * One of the building blocks of a neural network, a org.rparanjpe.deeplearning.Neuron is an immutable structure correlated with an activation
  * function and can be evaluated for some input weights and an input vector.
  */
 @Immutable
