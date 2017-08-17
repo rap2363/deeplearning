@@ -1,10 +1,11 @@
 import javax.annotation.concurrent.Immutable;
+import java.util.function.Function;
 
 /**
  * Implement a simple linear function with weights s.t. f(x) = w^x
  */
 @Immutable
-public class LinearFunction implements VectorFunction {
+public class LinearFunction implements Function<Vector, Double> {
     private final Vector weights;
 
     public LinearFunction(final Vector weights) {
@@ -12,7 +13,7 @@ public class LinearFunction implements VectorFunction {
     }
 
     @Override
-    public double evaluateAt(final Vector v) {
+    public Double apply(final Vector v) {
         return Vector.dot(weights, v);
     }
 }

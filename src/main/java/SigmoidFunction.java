@@ -1,11 +1,12 @@
 import javax.annotation.concurrent.Immutable;
+import java.util.function.Function;
 
 /**
  * The sigmoid function: f(a) = 1 / (1 + exp(-a))
  * This function is stateless,immutable, and needs no members, so it is instantiated as a singleton
  */
 @Immutable
-public final class SigmoidFunction implements RealFunction {
+public final class SigmoidFunction implements Function<Double, Double> {
     private static final SigmoidFunction INSTANCE = new SigmoidFunction();
 
     private SigmoidFunction() {
@@ -17,7 +18,7 @@ public final class SigmoidFunction implements RealFunction {
     }
 
     @Override
-    public double evaluateAt(final double value) {
+    public Double apply(final Double value) {
         return 1 / (1 + Math.exp(-value));
     }
 }

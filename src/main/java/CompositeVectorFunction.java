@@ -1,21 +1,23 @@
 import com.google.common.base.Preconditions;
 
 import javax.annotation.concurrent.Immutable;
+import java.util.Arrays;
+import java.util.function.Function;
 
 /**
- * A CompositeFunction is composed of multiple RealFunctions and one VectorFunction. Specifically:
- * RealFunction f = new CompositeFunction(f1, f2, f3);
+ * A CompositeFunction is composed of multiple Function<Double, Double> (the real functions f1, f2, ...) and one
+ * Function<Vector, Double> (the vector function v).
  *
- * implies f(x) = f3(f2(f1(x)))
+ * The order of application is: f3(f2(f1(v(x))))
  *
  */
 @Immutable
-public class CompositeVectorFunction implements VectorFunction {
-    private final VectorFunction vectorFunction;
-    private final RealFunction[] realFunctions;
+public class CompositeVectorFunction implements Function<Vector, Double> {
+    private final Function<Vector, Double> vectorFunction;
+    private final Function<Double, Double>[] realFunctions;
 
-    public CompositeVectorFunction(final VectorFunction vectorFunction,
-                                   final RealFunction... realFunctions) {
+    public CompositeVectorFunction(final Function<Vector, Double> vectorFunction,
+                                   final Function<Double, Double>... realFunctions) {
         this.vectorFunction = Preconditions.checkNotNull(vectorFunction);
         this.realFunctions = Preconditions.checkNotNull(realFunctions);
     }
@@ -26,11 +28,9 @@ public class CompositeVectorFunction implements VectorFunction {
      * @param vector
      * @return
      */
-    public double evaluateAt(final Vector vector) {
-        double value = this.vectorFunction.evaluateAt(vector);
-        for (final RealFunction realFunction : realFunctions) {
-            value = realFunction.evaluateAt(value);
-        }
-        return value;
+    public Double apply(final Vector vector) {
+        return Arrays.stream(realFunctions)
+                .reduce(Function.identity(), Function::andThen)
+                .apply(this.vectorFunction.apply(vector));
     }
 }

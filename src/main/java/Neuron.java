@@ -3,6 +3,7 @@ import com.google.common.base.Preconditions;
 import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * One of the building blocks of a neural network, a Neuron is an immutable structure correlated with an activation
@@ -10,20 +11,20 @@ import java.util.List;
  */
 @Immutable
 public final class Neuron {
-    public static final Neuron BIAS = new Neuron(RealFunction.UNITY);
+    public static final Neuron BIAS = new Neuron((Double v) -> 1d);
 
-    private final RealFunction activationFunction;
+    private final Function<Double, Double> activationFunction;
 
-    public Neuron(final RealFunction function) {
+    public Neuron(final Function<Double, Double> function) {
         this.activationFunction = function;
     }
 
     public double evaluate(final double input) {
-        return this.activationFunction.evaluateAt(input);
+        return this.activationFunction.apply(input);
     }
 
     public static List<Neuron> createLayerWithActivationFunction(final int size,
-                                                                 final RealFunction function) {
+                                                                 final Function<Double, Double> function) {
         final List<Neuron> neurons = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             neurons.add(new Neuron(function));
