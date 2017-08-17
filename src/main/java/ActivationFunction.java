@@ -1,6 +1,7 @@
 /**
- * A named interface to capture a the behavior of a real function. It doesn't add any functionality other than asserting
- * itself as a type).
+ * A function which maps the real numbers to the real numbers. Specifically used as an activation function for
+ * nodes.
  */
-public interface ActivationFunction extends RealFunction {
+public interface ActivationFunction {
+    double evaluateAt(double value);
 }

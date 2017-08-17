@@ -11,7 +11,8 @@ public class FunctionTest {
 
     @Test
     public void testSigmoidFunction() {
-        final ActivationFunction sigmoidFunction = new SigmoidFunction(new Vector(1, 2));
-        assertEquals(1 / (1 + Math.exp(-3)), sigmoidFunction.evaluateAt(new Vector(1, 1)), 1e-10);
+        final ActivationFunction sigmoidFunction = SigmoidFunction.of();
+        final double value = 3.4;
+        assertEquals(1 / (1 + Math.exp(-value)), sigmoidFunction.evaluateAt(value), 1e-10);
     }
 }
