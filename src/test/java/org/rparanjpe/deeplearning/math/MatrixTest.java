@@ -1,7 +1,5 @@
 package org.rparanjpe.deeplearning.math;
 
-import org.rparanjpe.deeplearning.math.Matrix;
-import org.rparanjpe.deeplearning.math.Vector;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -43,7 +41,7 @@ public class MatrixTest {
         try {
             new Matrix.Builder().build();
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("org.rparanjpe.deeplearning.math.Matrix must have at least one row!"));
+            assertThat(e.getMessage(), is("Matrix must have at least one row!"));
             exceptionThrown = true;
         }
         assertThat(exceptionThrown, is(true));

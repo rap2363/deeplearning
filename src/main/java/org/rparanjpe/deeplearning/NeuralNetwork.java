@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A org.rparanjpe.deeplearning.NeuralNetwork is built up of multiple layers of neurons with zero or more hidden layers, and an
+ * A NeuralNetwork is built up of multiple layers of neurons with zero or more hidden layers, and an
  * output layer.
  */
 @Immutable

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * One of the building blocks of a neural network, a org.rparanjpe.deeplearning.Neuron is an immutable structure correlated with an activation
+ * One of the building blocks of a neural network, a Neuron is an immutable structure correlated with an activation
  * function and can be evaluated for some input weights and an input vector.
  */
 @Immutable

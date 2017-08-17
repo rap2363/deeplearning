@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.function.Function;
 
 /**
- * A CompositeFunction is composed of multiple Function<Double, Double> (the real org.rparanjpe.deeplearning.functions f1, f2, ...) and one
- * Function<org.rparanjpe.deeplearning.math.Vector, Double> (the vector function v).
+ * A CompositeFunction is composed of multiple Function<Double, Double> (the real functions f1, f2, ...) and one
+ * Function<Vector, Double> (the vector function v).
  *
  * The order of application is: f3(f2(f1(v(x))))
  *
