@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A matrix {m_ij} is comprised of a list of a list of real numbers. It is built up using the Builder row by row.
+ * A matrix is comprised of an array of an array of real numbers. It is built up using the Builder row by row.
  *
  * One strong assumption is that a matrix's number of column elements is the same in each row. We throw an exception
  * if we try to add a row without the correct number of elements in the Builder.
@@ -17,6 +17,32 @@ public final class Matrix {
         for (int i = 0; i < rowList.size(); i++) {
             this.matrix[i] = rowList.get(i);
         }
+    }
+
+    /**
+     * Obtain the element at (row, col)
+     *
+     * @param row
+     * @param col
+     * @return
+     */
+    public double get(final int row, final int col) {
+        Preconditions.checkArgument(row >= 0 && row < matrix.length);
+        Preconditions.checkArgument(col >= 0 && col < matrix[0].length);
+        return matrix[row][col];
+    }
+
+    /**
+     * Replace the element at (row, col) with value
+     *
+     * @param row
+     * @param col
+     * @return
+     */
+    public void replace(final int row, final int col, final double value) {
+        Preconditions.checkArgument(row >= 0 && row < matrix.length);
+        Preconditions.checkArgument(col >= 0 && col < matrix[0].length);
+        matrix[row][col] = value;
     }
 
     /**
