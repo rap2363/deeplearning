@@ -2,10 +2,10 @@ package org.rparanjpe.deeplearning;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import org.rparanjpe.deeplearning.math.Tensor;
 import org.rparanjpe.deeplearning.math.Vector;
 
-import javax.annotation.concurrent.Immutable;
 import java.util.List;
 import java.util.function.Function;
 

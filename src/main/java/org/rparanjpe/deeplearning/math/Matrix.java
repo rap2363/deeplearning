@@ -1,6 +1,7 @@
 package org.rparanjpe.deeplearning.math;
 
 import com.google.common.base.Preconditions;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * One strong assumption is that a matrix's number of column elements is the same in each row. We throw an exception
  * if we try to add a row without the correct number of elements in the Builder.
  */
+@Immutable
 public final class Matrix {
     private final double[][] matrix;
 
@@ -50,19 +52,6 @@ public final class Matrix {
      */
     public int numCols() {
         return this.matrix[0].length;
-    }
-
-    /**
-     * Replace the element at (row, col) with value
-     *
-     * @param row
-     * @param col
-     * @return
-     */
-    public void replace(final int row, final int col, final double value) {
-        Preconditions.checkArgument(row >= 0 && row < matrix.length);
-        Preconditions.checkArgument(col >= 0 && col < matrix[0].length);
-        matrix[row][col] = value;
     }
 
     /**

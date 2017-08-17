@@ -1,6 +1,7 @@
 package org.rparanjpe.deeplearning.math;
 
 import com.google.common.base.Preconditions;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * A tensor is an array of matrices. There are no other conditions on the sizes of the matrices.
  */
+@Immutable
 public final class Tensor {
     private final Matrix[] matrices;
 
