@@ -57,6 +57,48 @@ public final class Vector implements Iterable<Double> {
     }
 
     /**
+     * Concatenate two vectors together to create a new vector with v1.size() + v2.size() total elements with the order
+     * v = [v1 | v2]
+     *
+     * @param v1
+     * @param v2
+     * @return
+     */
+    public static Vector concatenate(final Vector v1, final Vector v2) {
+        final double[] concatenatedValues = new double[v1.size() + v2.size()];
+        for (int i = 0; i < v1.size(); i++) {
+            concatenatedValues[i] = v1.get(i);
+        }
+        for (int i = 0; i < v2.size(); i++) {
+            concatenatedValues[i + v1.size()] = v2.get(i);
+        }
+
+        return new Vector(concatenatedValues);
+    }
+
+    /**
+     * Syntactic sugar
+     *
+     * @param vector
+     * @param value
+     * @return
+     */
+    public static Vector concatenate(final Vector vector, final double value) {
+        return Vector.concatenate(vector, new Vector(value));
+    }
+
+    /**
+     * Syntactic sugar
+     *
+     * @param vector
+     * @param value
+     * @return
+     */
+    public static Vector concatenate(final double value, final Vector vector) {
+        return Vector.concatenate(new Vector(value), vector);
+    }
+
+    /**
      * Return the dot product of two vectors
      *
      * @param v1

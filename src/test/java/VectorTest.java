@@ -23,6 +23,20 @@ public class VectorTest {
     }
 
     @Test
+    public void testVectorConcatenation() {
+        final Vector v1 = new Vector(1, 2, 3);
+        final Vector v2 = new Vector(4, 5);
+        final Vector v = Vector.concatenate(v1, v2);
+
+        assertEquals(5, v.size());
+        assertEquals(1, v.get(0), 1e-10);
+        assertEquals(2, v.get(1), 1e-10);
+        assertEquals(3, v.get(2), 1e-10);
+        assertEquals(4, v.get(3), 1e-10);
+        assertEquals(5, v.get(4), 1e-10);
+    }
+
+    @Test
     public void testVectorDotProduct() {
         final Vector v1 = new Vector(1, -3, 5);
         final Vector v2 = new Vector(-1, -2, -1);
