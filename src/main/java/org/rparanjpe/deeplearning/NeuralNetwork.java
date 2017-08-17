@@ -6,42 +6,37 @@ import org.rparanjpe.deeplearning.math.Tensor;
 import org.rparanjpe.deeplearning.math.Vector;
 
 import javax.annotation.concurrent.Immutable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
- * A NeuralNetwork is built up of multiple layers of neurons with zero or more hidden layers, and an
- * output layer.
+ * A NeuralNetwork is composed of a weight tensor and a NeuralLayers structure. It can be thought of as a Vector
+ * function (mapping a vector of inputs to a vector of outputs), by using the weight tensor and neuron activation
+ * functions.
  */
 @Immutable
-public final class NeuralNetwork {
-    private final List<List<Neuron>> hiddenLayers;
-    private final List<Neuron> outputLayer;
-    private final List<List<Neuron>> allLayers;
+public class NeuralNetwork implements Function<Vector, Vector> {
+    private final NeuralLayers neuralLayers;
+    private final Tensor weightTensor;
 
-    private NeuralNetwork(final List<List<Neuron>> hiddenLayers,
-                          final List<Neuron> outputLayer) {
-        this.hiddenLayers = hiddenLayers;
-        this.outputLayer = outputLayer;
-        this.allLayers = new ArrayList<>();
-        this.allLayers.addAll(hiddenLayers);
-        this.allLayers.add(outputLayer);
+    public NeuralNetwork(final NeuralLayers neuralLayers,
+                         final Tensor weightTensor) {
+        this.neuralLayers = Preconditions.checkNotNull(neuralLayers);
+        this.weightTensor = Preconditions.checkNotNull(weightTensor);
+        Preconditions.checkArgument(checkWeightTensor(weightTensor));
     }
 
-
     /**
-     * Evaluate the neural network for a given weight tensor and an input vector.
-     *
-     * @param weightTensor
+     * Evaluate the neural network for an input vector
      * @param inputs
      * @return
      */
-    public Vector evaluate(final Tensor weightTensor,
-                           final Vector inputs) {
-        Preconditions.checkArgument(checkWeightTensor(weightTensor, inputs));
+    @Override
+    public Vector apply(final Vector inputs) {
+        Preconditions.checkArgument(weightTensor.get(0).numCols() == inputs.size());
         Vector result = inputs;
-        for (int i = 0; i < this.allLayers.size(); i++) {
-            final List<Neuron> layer = this.allLayers.get(i);
+        for (int i = 0; i < this.neuralLayers.size(); i++) {
+            final List<Neuron> layer = this.neuralLayers.get(i);
             result = Neuron.evaluateLayer(layer, weightTensor.get(i).dot(result));
         }
         return result;
@@ -54,55 +49,25 @@ public final class NeuralNetwork {
      * @return
      */
     @VisibleForTesting
-    protected boolean checkWeightTensor(final Tensor weightTensor,
-                                        final Vector inputs) {
-        if (weightTensor.size() != this.allLayers.size()) {
+    protected boolean checkWeightTensor(final Tensor weightTensor) {
+        if (weightTensor.size() != this.neuralLayers.size()) {
             return false;
         }
 
-        if (weightTensor.get(0).numCols() != inputs.size()) {
+        if (weightTensor.get(0).numRows() != this.neuralLayers.get(0).size()) {
             return false;
         }
 
-        if (weightTensor.get(0).numRows() != this.allLayers.get(0).size()) {
-            return false;
-        }
-
-        for (int l = 1; l < this.allLayers.size(); l++) {
-            if (weightTensor.get(l).numCols() != this.allLayers.get(l - 1).size()) {
+        for (int l = 1; l < this.neuralLayers.size(); l++) {
+            if (weightTensor.get(l).numCols() != this.neuralLayers.get(l - 1).size()) {
                 return false;
             }
 
-            if (weightTensor.get(l).numRows() != this.allLayers.get(l).size()) {
+            if (weightTensor.get(l).numRows() != this.neuralLayers.get(l).size()) {
                 return false;
             }
         }
 
         return true;
-    }
-
-    public static class Builder {
-        private List<List<Neuron>> hiddenLayers;
-        private List<Neuron> outputLayer;
-
-        public Builder() {
-            this.hiddenLayers = new ArrayList<>();
-        }
-
-        public Builder addHiddenLayer(final List<Neuron> hiddenLayer) {
-            this.hiddenLayers.add(hiddenLayer);
-            return this;
-        }
-
-        public Builder setOutputLayer(final List<Neuron> outputLayer) {
-            this.outputLayer = outputLayer;
-            return this;
-        }
-
-        public NeuralNetwork build() {
-            Preconditions.checkNotNull(this.outputLayer);
-            Preconditions.checkArgument(this.outputLayer.size() > 0);
-            return new NeuralNetwork(this.hiddenLayers, this.outputLayer);
-        }
     }
 }

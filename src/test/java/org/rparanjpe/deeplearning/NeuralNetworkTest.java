@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 public class NeuralNetworkTest {
     @Test
     public void testSparseAutoEncoderNetworkEvaluation() {
-        final NeuralNetwork autoEncoderNetwork = new NeuralNetwork.Builder()
+        final NeuralLayers autoEncoderLayers = new NeuralLayers.Builder()
                 .addHiddenLayer(Neuron.createLayerWithActivationFunction(2, Function.identity()))
                 .setOutputLayer(Neuron.createLayerWithActivationFunction(3, SigmoidFunction.of()))
                 .build();
@@ -40,8 +40,9 @@ public class NeuralNetworkTest {
                         .addRow(i, j)
                         .build())
                 .build();
+        final NeuralNetwork autoEncoderNetwork = new NeuralNetwork(autoEncoderLayers, weightTensor);
         final Vector inputs = new Vector(1, 1);
-        final Vector outputs = autoEncoderNetwork.evaluate(weightTensor, inputs);
+        final Vector outputs = autoEncoderNetwork.apply(inputs);
         assertThat(outputs.size(), is(3));
         assertEquals(SigmoidFunction.of().apply((a + b) * e + (c + d) * f), outputs.get(0), 1e-10);
         assertEquals(SigmoidFunction.of().apply((a + b) * g + (c + d) * h), outputs.get(1), 1e-10);
